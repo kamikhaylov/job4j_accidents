@@ -18,9 +18,9 @@ public class AccidentsController {
     private final AccidentsService accidentsService;
 
     /**
-     * Получение всех автонарушений
+     * Получение всех инцидентов
      *
-     * @return страница со списком всех автонарушений
+     * @return страница со списком всех инцидентов
      */
     @GetMapping("/list")
     public String getAll(Model model) {

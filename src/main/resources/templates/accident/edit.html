@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="block/head.html :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="block/navbar.html :: navbar"></div>
+
+    <div class="container-fluid px-0 py-3">
+        <div class="border border-secondary border-opacity-50">
+            <h5 class="text-center fw-semibold p-2">Отредактируйте информацию об инциденте</h5>
+            <form th:action="@{/accident/edit}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" th:field="${accident.id}">
+
+                <div class="p-3 d-flex flex-wrap">
+
+                    <!--Наименнование-->
+                    <div class="p-2" style="width:300px">
+                        <label for="name">Наименнование</label>
+                        <input type="text" class="form-control border border-secondary border-opacity-50"
+                               id="name" name="name" th:field="${accident.name}" required>
+                    </div>
+
+                    <!--Адрес-->
+                    <div class="p-2" style="width:300px">
+                        <label for="address">Адрес</label>
+                        <input type="text" class="form-control border border-secondary border-opacity-50"
+                               id="address" name="address" th:field="${accident.address}" required>
+                    </div>
+                </div>
+
+                <!--Описание-->
+                <div class="p-4" style="max-width:900px">
+                    <label for="text">Описание</label>
+                    <textarea type="text" class="form-control border border-secondary border-opacity-50" rows="10"
+                              id="text" name="text" th:field="${accident.text}" required></textarea>
+                </div>
+
+                <div class="p-4 d-flex justify-content-end">
+                    <a>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,6 +1,20 @@
 <div th:fragment="body">
     <td class="text-center align-middle" width="10%" th:text="${accident.id}"/>
-    <td class="text-center align-middle" width="25%" th:text="${accident.name}"/>
+    <td class="text-center align-middle" width="20%" th:text="${accident.name}"/>
     <td class="text-center align-middle" width="30%" th:text="${accident.text}"/>
-    <td class="text-center align-middle" width="25%" th:text="${accident.address}"/>
+    <td class="text-center align-middle" width="20%" th:text="${accident.address}"/>
+    <td class="text-center align-middle" width="20%">
+        <div>
+            <a th:href="@{|/accident/details/${accident.id}|}">
+                <button class="btn btn-lg" style="background-color:transparent;">
+                    <i class="fa fa-list"></i>
+                </button>
+            </a>
+            <a th:href="@{|/accident/edit/${accident.id}|}">
+                <button class="btn btn-lg" style="background-color:transparent;">
+                    <i class="fa fa-pencil"></i>
+                </button>
+            </a>
+        </div>
+    </td>
 </div>

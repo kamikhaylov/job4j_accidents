@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * Модель аввтонарушения
+ * Модель инцидента
  */
 @Data
 @AllArgsConstructor

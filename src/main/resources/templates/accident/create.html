@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="block/head.html :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="block/navbar.html :: navbar"></div>
+    <div class="container-fluid px-0 py-3">
+        <div class="border border-secondary border-opacity-50">
+            <h5 class="text-center fw-semibold p-2">Заполните информацию об автонарушение</h5>
+            <form th:action="@{/accident/create}" method="post" enctype="multipart/form-data">
+                <div class="p-3 d-flex flex-wrap">
+
+                    <!--Наименнование-->
+                    <div class="p-2" style="width:300px">
+                        <label for="name">Наименнование</label>
+                        <input type="text" class="form-control border border-secondary border-opacity-50"
+                               id="name" name="name" required>
+                    </div>
+
+                    <!--Адрес-->
+                    <div class="p-2" style="width:300px">
+                        <label for="address">Адрес</label>
+                        <input type="text" class="form-control border border-secondary border-opacity-50"
+                               id="address" name="address" required>
+                    </div>
+                </div>
+
+                <!--Описание-->
+                <div class="p-4" style="max-width:900px">
+                    <label for="text">Описание</label>
+                    <textarea type="text" class="form-control border border-secondary border-opacity-50" rows="10"
+                              id="text" name="text" required></textarea>
+                </div>
+
+                <div class="d-flex p-4 justify-content-end">
+                    <button type="submit" class="btn btn-primary mt-3">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

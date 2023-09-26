@@ -7,6 +7,9 @@
         <div class="p-4 d-flex justify-content-center">
             <div>Добро пожаловать, <span th:text="${user}"></span>!</div>
         </div>
+        <a th:href="@{|/accident/create|}">
+            <button type="button" class="btn btn-secondary">Добавить инцидент</button>
+        </a>
     </div>
 </body>
 </html>

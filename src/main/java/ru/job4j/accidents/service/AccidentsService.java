@@ -9,7 +9,7 @@ import ru.job4j.accidents.repository.api.AccidentRepository;
 import java.util.List;
 
 /**
- * Сервисный слой для работы со списками автонарушений
+ * Сервисный слой для работы со списками инцидентов
  */
 @ThreadSafe
 @Service
@@ -19,9 +19,9 @@ public class AccidentsService {
     private final AccidentRepository accidentRepository;
 
     /**
-     * Получить список всех автонарушений.
+     * Получить список всех инцидентов.
      *
-     * @return список автонарушений
+     * @return список инцидентов
      */
     public List<Accident> getAll() {
         return accidentRepository.findAll();

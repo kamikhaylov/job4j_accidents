@@ -17,7 +17,7 @@ import static ru.job4j.accidents.common.logging.AccidentLogEvent.ACC1000;
 import static ru.job4j.accidents.common.logging.AccidentLogEvent.ACC1001;
 
 /**
- * Реализация методов для работы с БД автонарушений в памяти
+ * Реализация методов для работы с БД инцидентов в памяти
  */
 @ThreadSafe
 @Repository
