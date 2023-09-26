@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
 
@@ -35,8 +35,8 @@ public class AccidentController {
     }
 
     /** Показать страницу редактирования инцидента */
-    @GetMapping("/edit/{id}")
-    public String viewEdit(Model model, @PathVariable("id") int id) {
+    @GetMapping("/edit")
+    public String viewEdit(Model model, @RequestParam("id") int id) {
         model.addAttribute("accident", accidentService.getById(id));
         return "accident/edit";
     }
@@ -49,8 +49,8 @@ public class AccidentController {
     }
 
     /** Показать страницу детальной информации по инциденту */
-    @GetMapping("/details/{id}")
-    public String viewDetails(Model model, @PathVariable("id") int id) {
+    @GetMapping("/details")
+    public String viewDetails(Model model, @RequestParam("id") int id) {
         model.addAttribute("accident", accidentService.getById(id));
         return "accident/details";
     }

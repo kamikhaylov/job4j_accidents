@@ -5,7 +5,7 @@
 <div class="container">
     <div th:replace="block/navbar.html :: navbar"></div>
     <div>
-        <a th:href="@{|/accident/edit/${accident.id}|}">
+        <a th:href="@{|/accident/edit?id=${accident.id}|}">
             <button type="button" class="btn btn-secondary">Редактировать</button>
         </a>
     </div>
