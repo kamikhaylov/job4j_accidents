@@ -4,9 +4,9 @@
 <body>
     <div class="container">
         <div th:replace="block/navbar.html :: navbar"></div>
-    </div>
-    <div class="container">
-        <div th:text="${user}"></div>
+        <div class="p-4 d-flex justify-content-center">
+            <div>Добро пожаловать, <span th:text="${user}"></span>!</div>
+        </div>
     </div>
 </body>
 </html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="block/head.html :: head"></head>
+<body>
+    <div class="container">
+        <div th:replace="block/navbar.html :: navbar"></div>
+        <br>
+        <div class="container-fluid px-0 py-2" style="max-width:1600px">
+            <div>
+                <table class="table">
+                    <div th:replace="accident/thead.html :: thead"></div>
+                    <tbody>
+                    <tr th:each="accident: ${accidents}">
+                        <div th:replace="accident/body.html :: body"></div>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
