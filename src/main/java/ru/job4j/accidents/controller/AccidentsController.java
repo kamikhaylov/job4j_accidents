@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.accidents.service.AccidentsService;
 
 /**
- * Контроллер начальной страницы
+ * Контроллер работы со списками инцидентов
  */
 @Controller
 @AllArgsConstructor
