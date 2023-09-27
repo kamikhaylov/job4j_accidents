@@ -26,5 +26,5 @@ kanmikhaylov@gmail.com
 
 [actions-image]: https://github.com/kamikhaylov/job4j_accidents/actions/workflows/maven.yml/badge.svg
 [actions-url]: https://github.com/kamikhaylov/job4j_accidents/actions/workflows/maven.yml
-[codecov-image]: https://codecov.io/gh/kamikhaylov/job4j_accidents/graph/badge.svg?token=
+[codecov-image]: https://codecov.io/gh/kamikhaylov/job4j_accidents/graph/badge.svg?token=OOJSR71PZJ
 [codecov-url]: https://codecov.io/gh/kamikhaylov/job4j_accidents
