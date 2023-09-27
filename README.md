@@ -2,6 +2,7 @@
 Проект "Автонарушители"
 
 [![github actions][actions-image]][actions-url]
+[![coverage][codecov-image]][codecov-url]
 
 В системе существуют две роли. Обычные пользователи и автоинспекторы.
 Пользователь добавляет описание инцидента.
@@ -25,3 +26,5 @@ kanmikhaylov@gmail.com
 
 [actions-image]: https://github.com/kamikhaylov/job4j_accidents/actions/workflows/maven.yml/badge.svg
 [actions-url]: https://github.com/kamikhaylov/job4j_accidents/actions/workflows/maven.yml
+[codecov-image]: https://codecov.io/gh/kamikhaylov/job4j_accidents/graph/badge.svg?token=
+[codecov-url]: https://codecov.io/gh/kamikhaylov/job4j_accidents
