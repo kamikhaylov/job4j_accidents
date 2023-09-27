@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
 import ru.job4j.accidents.service.AccidentTypeService;
+import ru.job4j.accidents.service.RuleService;
 
 import java.util.Optional;
+import java.util.Set;
 
 import static ru.job4j.accidents.common.logging.AccidentLogEvent.ACC0001;
 
@@ -26,19 +28,22 @@ public class AccidentController {
 
     private final AccidentService accidentService;
     private final AccidentTypeService accidentTypeService;
+    private final RuleService ruleService;
 
     /** Показать страницу добавления инцидента */
     @GetMapping("/create")
     public String viewCreate(Model model) {
         model.addAttribute("types", accidentTypeService.getAll());
+        model.addAttribute("rules", ruleService.getAll());
         return "accident/create";
     }
 
     /** Добавить инцидент */
     @PostMapping("/create")
     public String create(@ModelAttribute Accident accident,
-            @RequestParam("type.id") int typeId) {
-        accidentService.create(accident, typeId);
+                         @RequestParam("type.id") int typeId,
+                         @RequestParam("ruleIds") Set<Integer> ruleIds) {
+        accidentService.create(accident, typeId, ruleIds);
         return "redirect:/accidents/list";
     }
 
@@ -47,14 +52,16 @@ public class AccidentController {
     public String viewEdit(Model model, @RequestParam("id") int id) {
         model.addAttribute("accident", accidentService.getById(id).get());
         model.addAttribute("types", accidentTypeService.getAll());
+        model.addAttribute("rules", ruleService.getAll());
         return "accident/edit";
     }
 
     /** Редактировать инцидент */
     @PostMapping("/edit")
     public String edit(@ModelAttribute Accident accident,
-                       @RequestParam("type.id") int typeId) {
-        accidentService.update(accident, typeId);
+                       @RequestParam("type.id") int typeId,
+                       @RequestParam("ruleIds") Set<Integer> ruleIds) {
+        accidentService.update(accident, typeId, ruleIds);
         return "redirect:/accidents/list";
     }
 

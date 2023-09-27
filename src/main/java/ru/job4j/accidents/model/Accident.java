@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 /**
  * Модель инцидента
  */
@@ -29,4 +31,7 @@ public class Accident {
 
     /** Тип инцидента */
     private AccidentType type;
+
+    /** Статьи инцидента */
+    private Set<Rule> rules;
 }

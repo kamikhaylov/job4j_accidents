@@ -31,6 +31,7 @@ public class AccidentTypeService {
     /**
      * Получить тип инцидента по id.
      *
+     * @param id идентификатор типа инцидента
      * @return тип инцидента
      */
     public Optional<AccidentType> getById(int id) {

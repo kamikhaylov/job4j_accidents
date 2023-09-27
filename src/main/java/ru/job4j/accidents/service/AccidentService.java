@@ -7,6 +7,7 @@ import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.repository.api.AccidentRepository;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Сервисный слой для работы с одним инцидентом
@@ -18,15 +19,18 @@ public class AccidentService {
 
     private final AccidentRepository accidentRepository;
     private final AccidentTypeService accidentTypeService;
+    private final RuleService ruleService;
 
     /**
      * Создать инцидент.
      *
      * @param accident инцидент
-     * @param typeId идентификатор типа инцидента
+     * @param typeId   идентификатор типа инцидента
+     * @param ruleIds  список идентификаторов статей инцидента
      */
-    public void create(Accident accident, int typeId) {
+    public void create(Accident accident, int typeId, Set<Integer> ruleIds) {
         accident.setType(accidentTypeService.getById(typeId).get());
+        accident.setRules(ruleService.findByIdList(ruleIds));
         accidentRepository.create(accident);
     }
 
@@ -34,16 +38,19 @@ public class AccidentService {
      * Обновить инцидент.
      *
      * @param accident инцидент
-     * @param typeId идентификатор типа инцидента
+     * @param typeId   идентификатор типа инцидента
+     * @param ruleIds  список идентификаторов статей инцидента
      */
-    public void update(Accident accident, int typeId) {
+    public void update(Accident accident, int typeId, Set<Integer> ruleIds) {
         accident.setType(accidentTypeService.getById(typeId).get());
+        accident.setRules(ruleService.findByIdList(ruleIds));
         accidentRepository.update(accident);
     }
 
     /**
      * Получить инцидент по id.
      *
+     * @param id идентификатор инцидента
      * @return инцидент
      */
     public Optional<Accident> getById(int id) {

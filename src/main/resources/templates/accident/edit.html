@@ -28,7 +28,7 @@
                     </div>
 
                     <!--Тип-->
-                    <div class="p-2" style="width:150px">
+                    <div class="p-2" style="width:300px">
                         <label for="type.id">Тип</label>
                         <select class="form-control border border-secondary border-opacity-50" id="type.id" name="type.id">
                             <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"
@@ -38,10 +38,24 @@
                 </div>
 
                 <!--Описание-->
-                <div class="p-4" style="max-width:900px">
+                <div class="p-4" style="max-width:930px">
                     <label for="text">Описание</label>
                     <textarea type="text" class="form-control border border-secondary border-opacity-50" rows="10"
                               id="text" name="text" th:field="${accident.text}" required></textarea>
+                </div>
+
+
+                <div class="p-3 d-flex flex-wrap">
+                    <!--Статьи-->
+                    <div class="form-group">
+                        <div class="p-2" style="width:300px">
+                            <label for="ruleIds" name="ruleIds">Статьи</label>
+                            <select class="form-control" id="ruleIds" name="ruleIds" multiple>
+                                <option th:each="rule: ${rules}" th:text="${rule.name}" th:value="${rule.id}"
+                                        th:selected="${accident.rules.contains(rule)}"></option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="p-4 d-flex justify-content-end">

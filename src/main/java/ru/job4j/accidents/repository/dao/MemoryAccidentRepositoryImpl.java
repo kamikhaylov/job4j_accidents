@@ -4,11 +4,13 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
+import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.api.AccidentRepository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -28,15 +30,27 @@ public class MemoryAccidentRepositoryImpl implements AccidentRepository {
         create(new Accident(0, "ДТП",
                 "Столкновение двух автомобилей",
                 "Самара, ул. Куйбышева 10",
-                new AccidentType(1, "Автомобили")));
+                new AccidentType(1, "Автомобили"),
+                Set.of(
+                        new Rule(1, "Статья. 1")
+                )));
         create(new Accident(0, "Нарушение ПДД",
                 "Выезд на встречную полосу движения",
                 "Самара, Московское ш., 15",
-                new AccidentType(2, "ПДД")));
+                new AccidentType(2, "ПДД"),
+                Set.of(
+                        new Rule(1, "Статья. 1"),
+                        new Rule(2, "Статья. 2")
+                )));
         create(new Accident(0, "Происшествие на дороге",
                 "Открытый люк",
                 "Самара, ул. Ленина, 23",
-                new AccidentType(3, "Инфраструктура")));
+                new AccidentType(3, "Инфраструктура"),
+                Set.of(
+                        new Rule(1, "Статья. 1"),
+                        new Rule(2, "Статья. 2"),
+                        new Rule(3, "Статья. 3")
+                )));
     }
 
     @Override
@@ -55,7 +69,9 @@ public class MemoryAccidentRepositoryImpl implements AccidentRepository {
                         accident.getName(),
                         accident.getText(),
                         accident.getAddress(),
-                        accident.getType())));
+                        accident.getType(),
+                        accident.getRules()
+                )));
     }
 
     @Override
