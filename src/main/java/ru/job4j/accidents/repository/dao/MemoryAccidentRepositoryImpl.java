@@ -1,10 +1,9 @@
 package ru.job4j.accidents.repository.dao;
 
 import net.jcip.annotations.ThreadSafe;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.api.AccidentRepository;
 
 import java.util.List;
@@ -13,8 +12,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static ru.job4j.accidents.common.logging.AccidentLogEvent.ACC1000;
-import static ru.job4j.accidents.common.logging.AccidentLogEvent.ACC1001;
+import static java.util.Objects.nonNull;
 
 /**
  * Реализация методов для работы с БД инцидентов в памяти
@@ -23,19 +21,22 @@ import static ru.job4j.accidents.common.logging.AccidentLogEvent.ACC1001;
 @Repository
 public class MemoryAccidentRepositoryImpl implements AccidentRepository {
 
-    private static final Logger LOGGER =
-            LoggerFactory.getLogger(MemoryAccidentRepositoryImpl.class.getName());
-
     private final AtomicInteger id = new AtomicInteger();
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
 
     public MemoryAccidentRepositoryImpl() {
         create(new Accident(0, "ДТП",
-                "Столкновение двух автомобилей", "Самара, ул. Куйбышева 10"));
+                "Столкновение двух автомобилей",
+                "Самара, ул. Куйбышева 10",
+                new AccidentType(1, "Автомобили")));
         create(new Accident(0, "Нарушение ПДД",
-                "Выезд на встречную полосу движения", "Самара, Московское ш., 15"));
+                "Выезд на встречную полосу движения",
+                "Самара, Московское ш., 15",
+                new AccidentType(2, "ПДД")));
         create(new Accident(0, "Происшествие на дороге",
-                "Открытый люк", "Самара, ул. Ленина, 23"));
+                "Открытый люк",
+                "Самара, ул. Ленина, 23",
+                new AccidentType(3, "Инфраструктура")));
     }
 
     @Override
@@ -47,26 +48,19 @@ public class MemoryAccidentRepositoryImpl implements AccidentRepository {
 
     @Override
     public boolean update(Accident accident) {
-        Optional<Accident> accidentFound = findById(accident.getId());
-        if (accidentFound.isEmpty()) {
-            LOGGER.error(ACC1000.toString(), accident);
-            return false;
-        } else {
-            accidents.put(accident.getId(), accident);
-            return true;
-        }
+        return nonNull(accidents.computeIfPresent(
+                accident.getId(),
+                (id, oldAccident) -> new Accident(
+                        id,
+                        accident.getName(),
+                        accident.getText(),
+                        accident.getAddress(),
+                        accident.getType())));
     }
 
     @Override
     public boolean delete(int id) {
-        Optional<Accident> accidentFound = findById(id);
-        if (accidentFound.isEmpty()) {
-            LOGGER.error(ACC1001.toString(), id);
-            return false;
-        } else {
-            accidents.remove(id);
-            return true;
-        }
+        return nonNull(accidents.remove(id));
     }
 
     @Override

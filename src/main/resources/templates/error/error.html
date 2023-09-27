@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="block/head.html :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="block/navbar.html :: navbar"></div>
+    <div class="p-4 d-flex justify-content-center">
+        <div class="alert alert-danger" role="alert">
+            <span th:text="${text}"></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

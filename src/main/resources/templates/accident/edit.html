@@ -26,6 +26,15 @@
                         <input type="text" class="form-control border border-secondary border-opacity-50"
                                id="address" name="address" th:field="${accident.address}" required>
                     </div>
+
+                    <!--Тип-->
+                    <div class="p-2" style="width:150px">
+                        <label for="type.id">Тип</label>
+                        <select class="form-control border border-secondary border-opacity-50" id="type.id" name="type.id">
+                            <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"
+                                    th:field="${accident.type.id}"></option>
+                        </select>
+                    </div>
                 </div>
 
                 <!--Описание-->

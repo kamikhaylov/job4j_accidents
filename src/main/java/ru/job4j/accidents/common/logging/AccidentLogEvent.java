@@ -5,8 +5,7 @@ package ru.job4j.accidents.common.logging;
  */
 public enum AccidentLogEvent implements LogEvent {
 
-    ACC1000("Не найдена запись для обновления"),
-    ACC1001("Не найдена запись для удаления");
+    ACC0001("Не найден инцидент");
 
     private final String title;
 
@@ -26,6 +25,6 @@ public enum AccidentLogEvent implements LogEvent {
 
     @Override
     public String toString() {
-        return getCode() + "." + getTitle();
+        return getCode() + ". " + getTitle();
     }
 }
