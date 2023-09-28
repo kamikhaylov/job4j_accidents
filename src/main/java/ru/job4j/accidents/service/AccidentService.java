@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.api.AccidentRepository;
 
 import java.util.Optional;
@@ -40,11 +41,16 @@ public class AccidentService {
      * @param accident инцидент
      * @param typeId   идентификатор типа инцидента
      * @param ruleIds  список идентификаторов статей инцидента
+     * @return результат обновления, true - запись обновлена, false - не обновлена
      */
-    public void update(Accident accident, int typeId, Set<Integer> ruleIds) {
-        accident.setType(accidentTypeService.getById(typeId).get());
+    public boolean update(Accident accident, int typeId, Set<Integer> ruleIds) {
+        Optional<AccidentType> types = accidentTypeService.getById(typeId);
+        if (types.isEmpty()) {
+            return false;
+        }
+        accident.setType(types.get());
         accident.setRules(ruleService.findByIdList(ruleIds));
-        accidentRepository.update(accident);
+        return accidentRepository.update(accident);
     }
 
     /**

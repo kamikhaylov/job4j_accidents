@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static ru.job4j.accidents.common.logging.AccidentLogEvent.ACC0001;
+import static ru.job4j.accidents.common.logging.AccidentLogEvent.ACC0002;
 
 /**
  * Контроллер работы с одним инцидентом
@@ -50,7 +51,12 @@ public class AccidentController {
     /** Показать страницу редактирования инцидента */
     @GetMapping("/edit")
     public String viewEdit(Model model, @RequestParam("id") int id) {
-        model.addAttribute("accident", accidentService.getById(id).get());
+        Optional<Accident> accident = accidentService.getById(id);
+        if (accident.isEmpty()) {
+            model.addAttribute("text", ACC0001.toString());
+            return "error/error";
+        }
+        model.addAttribute("accident", accident.get());
         model.addAttribute("types", accidentTypeService.getAll());
         model.addAttribute("rules", ruleService.getAll());
         return "accident/edit";
@@ -58,10 +64,14 @@ public class AccidentController {
 
     /** Редактировать инцидент */
     @PostMapping("/edit")
-    public String edit(@ModelAttribute Accident accident,
+    public String edit(Model model,
+                       @ModelAttribute Accident accident,
                        @RequestParam("type.id") int typeId,
                        @RequestParam("ruleIds") Set<Integer> ruleIds) {
-        accidentService.update(accident, typeId, ruleIds);
+        if (!accidentService.update(accident, typeId, ruleIds)) {
+            model.addAttribute("text", ACC0002.toString());
+            return "error/error";
+        }
         return "redirect:/accidents/list";
     }
 
