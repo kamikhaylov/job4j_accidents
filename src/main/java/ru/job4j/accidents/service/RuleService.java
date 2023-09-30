@@ -19,7 +19,7 @@ public class RuleService {
     private final RuleRepository ruleRepository;
 
     public RuleService(
-            @Qualifier("jdbcRuleRepositoryImpl") RuleRepository ruleRepository) {
+            @Qualifier("hibernateRuleRepositoryImpl") RuleRepository ruleRepository) {
         this.ruleRepository = ruleRepository;
     }
 

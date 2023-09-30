@@ -22,7 +22,7 @@ public class AccidentService {
     private final RuleService ruleService;
 
     public AccidentService(
-            @Qualifier("jdbcAccidentRepositoryImpl") AccidentRepository accidentRepository,
+            @Qualifier("hibernateAccidentRepositoryImpl") AccidentRepository accidentRepository,
             AccidentTypeService accidentTypeService,
             RuleService ruleService) {
         this.accidentRepository = accidentRepository;

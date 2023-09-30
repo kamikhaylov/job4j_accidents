@@ -18,7 +18,7 @@ public class AccidentsService {
     private final AccidentRepository accidentRepository;
 
     public AccidentsService(
-            @Qualifier("jdbcAccidentRepositoryImpl") AccidentRepository accidentRepository) {
+            @Qualifier("hibernateAccidentRepositoryImpl") AccidentRepository accidentRepository) {
         this.accidentRepository = accidentRepository;
     }
 
