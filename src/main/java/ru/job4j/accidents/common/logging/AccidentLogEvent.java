@@ -6,7 +6,9 @@ package ru.job4j.accidents.common.logging;
 public enum AccidentLogEvent implements LogEvent {
 
     ACC0001("Не найден инцидент"),
-    ACC0002("Редактирование завершено с ошибкой");
+    ACC0002("Редактирование завершено с ошибкой"),
+    ACC0003("Некорректный логин или пароль"),
+    ACC0004("Успешный выход из системы");
 
     private final String title;
 
