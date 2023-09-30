@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Rule {
 
-    /** Идентификатор статьи нарушения */
+    /** Идентификатор статьи инцидента */
     @EqualsAndHashCode.Include
     private int id;
 
-    /** Наименование статьи */
+    /** Наименование статьи инцидента */
     private String name;
 }

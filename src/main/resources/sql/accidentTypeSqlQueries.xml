@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="createAccidentType">
+        <![CDATA[
+            insert into accident_types
+                (
+                    name
+                )
+            values
+                (
+                    :name
+                )
+        ]]>
+    </entry>
+
+    <entry key="updateAccidentType">
+        <![CDATA[
+            update accident_types
+            set name = :name
+            where id = :id
+        ]]>
+    </entry>
+
+    <entry key="deleteAccidentType">
+        <![CDATA[
+            delete from accident_types
+            where id = :id
+        ]]>
+    </entry>
+
+    <entry key="findAccidentTypeById">
+        <![CDATA[
+            select
+                id as id,
+                name as name
+            from accident_types
+            where id = :id
+            fetch first 1 rows only
+        ]]>
+    </entry>
+
+    <entry key="findAccidentTypeAll">
+        <![CDATA[
+            select
+                id,
+                name
+            from accident_types
+        ]]>
+    </entry>
+
+</properties>

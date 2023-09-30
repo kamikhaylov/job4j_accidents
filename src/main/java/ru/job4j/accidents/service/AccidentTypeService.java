@@ -1,7 +1,7 @@
 package ru.job4j.accidents.service;
 
-import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.api.AccidentTypeRepository;
@@ -14,10 +14,14 @@ import java.util.Optional;
  */
 @ThreadSafe
 @Service
-@AllArgsConstructor
 public class AccidentTypeService {
 
     private final AccidentTypeRepository accidentTypeRepository;
+
+    public AccidentTypeService(
+            @Qualifier("jdbcAccidentTypeRepositoryImpl") AccidentTypeRepository accidentTypeRepository) {
+        this.accidentTypeRepository = accidentTypeRepository;
+    }
 
     /**
      * Получить список всех типов инцидентов.

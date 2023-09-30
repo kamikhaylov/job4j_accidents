@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="createRule">
+        <![CDATA[
+            insert into rules
+                (
+                    name
+                )
+            values
+                (
+                    :name
+                )
+        ]]>
+    </entry>
+
+    <entry key="updateRule">
+        <![CDATA[
+            update rules
+            set name = :name
+            where id = :id
+        ]]>
+    </entry>
+
+    <entry key="deleteRule">
+        <![CDATA[
+            delete from rules
+            where id = :id
+        ]]>
+    </entry>
+
+    <entry key="findRuleById">
+        <![CDATA[
+            select
+                id as id,
+                name as name
+            from rules
+            where id = :id
+            fetch first 1 rows only
+        ]]>
+    </entry>
+
+    <entry key="findRuleAll">
+        <![CDATA[
+            select
+                id,
+                name
+            from rules
+        ]]>
+    </entry>
+
+</properties>

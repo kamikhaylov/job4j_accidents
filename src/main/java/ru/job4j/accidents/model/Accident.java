@@ -20,13 +20,13 @@ public class Accident {
     @EqualsAndHashCode.Include
     private int id;
 
-    /** Наименование */
+    /** Наименование инцидента */
     private String name;
 
-    /** Описание */
+    /** Описание инцидента */
     private String text;
 
-    /** Адрес */
+    /** Адрес инцидента */
     private String address;
 
     /** Тип инцидента */

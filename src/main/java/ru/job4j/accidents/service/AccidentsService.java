@@ -1,7 +1,7 @@
 package ru.job4j.accidents.service;
 
-import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.repository.api.AccidentRepository;
@@ -13,10 +13,14 @@ import java.util.List;
  */
 @ThreadSafe
 @Service
-@AllArgsConstructor
 public class AccidentsService {
 
     private final AccidentRepository accidentRepository;
+
+    public AccidentsService(
+            @Qualifier("jdbcAccidentRepositoryImpl") AccidentRepository accidentRepository) {
+        this.accidentRepository = accidentRepository;
+    }
 
     /**
      * Получить список всех инцидентов.

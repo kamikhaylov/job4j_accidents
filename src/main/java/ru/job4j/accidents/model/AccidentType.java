@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class AccidentType {
 
-    /** Идентификатор инцидента */
+    /** Идентификатор типа инцидента */
     @EqualsAndHashCode.Include
     private int id;
 

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="createAccident">
+        <![CDATA[
+            insert into accidents
+                (
+                    name,
+                    text,
+                    address,
+                    type_id
+                )
+            values
+                (
+                    :name,
+                    :text,
+                    :address,
+                    :typeId
+                )
+        ]]>
+    </entry>
+
+    <entry key="updateAccident">
+        <![CDATA[
+            update accidents
+            set
+                name = :name,
+                text = :text,
+                address = :address,
+                type_id = :typeId
+            where id = :id
+        ]]>
+    </entry>
+
+    <entry key="deleteAccident">
+        <![CDATA[
+            delete from accidents
+            where id = :id
+        ]]>
+    </entry>
+
+    <entry key="findAccidentById">
+        <![CDATA[
+            select
+                accident.id,
+                accident.name,
+                accident.text,
+                accident.address,
+                type.id as type_id,
+                type.name as type_name,
+                rule.id as rule_id,
+                rule.name as rule_name
+            from accidents as accident
+                left join accident_types as type on accident.type_id = type.id
+                left join accident_rules as acc_rule on accident.id = acc_rule.accident_id
+                left join rules as rule on acc_rule.rule_id = rule.id
+            where accident.id = :id
+        ]]>
+    </entry>
+
+    <entry key="findAccidentAll">
+        <![CDATA[
+            select
+                accident.id,
+                accident.name,
+                accident.text,
+                accident.address,
+                type.id as type_id,
+                type.name as type_name,
+                rule.id as rule_id,
+                rule.name as rule_name
+            from accidents as accident
+                left join accident_types as type on accident.type_id = type.id
+                left join accident_rules as acc_rule on accident.id = acc_rule.accident_id
+                left join rules as rule on acc_rule.rule_id = rule.id
+        ]]>
+    </entry>
+
+    <entry key="createAccidentRules">
+        <![CDATA[
+            insert into accident_rules
+                (
+                    accident_id,
+                    rule_id
+                )
+            values
+                (
+                    :accidentId,
+                    :ruleId
+                )
+        ]]>
+    </entry>
+
+    <entry key="deleteAccidentRules">
+        <![CDATA[
+            delete from accident_rules
+            where accident_id = :accidentId
+        ]]>
+    </entry>
+
+</properties>

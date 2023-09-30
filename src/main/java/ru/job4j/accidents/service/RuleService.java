@@ -1,7 +1,7 @@
 package ru.job4j.accidents.service;
 
-import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.api.RuleRepository;
@@ -14,10 +14,14 @@ import java.util.Set;
  */
 @ThreadSafe
 @Service
-@AllArgsConstructor
 public class RuleService {
 
     private final RuleRepository ruleRepository;
+
+    public RuleService(
+            @Qualifier("jdbcRuleRepositoryImpl") RuleRepository ruleRepository) {
+        this.ruleRepository = ruleRepository;
+    }
 
     /**
      * Получить список всех статей инцидентов.
