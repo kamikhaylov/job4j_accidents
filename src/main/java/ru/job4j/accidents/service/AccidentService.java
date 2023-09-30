@@ -1,11 +1,11 @@
 package ru.job4j.accidents.service;
 
+import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
-import ru.job4j.accidents.repository.api.AccidentRepository;
+import ru.job4j.accidents.repository.data.DataAccidentRepository;
 
 import java.util.Optional;
 import java.util.Set;
@@ -15,20 +15,12 @@ import java.util.Set;
  */
 @ThreadSafe
 @Service
+@AllArgsConstructor
 public class AccidentService {
 
-    private final AccidentRepository accidentRepository;
+    private final DataAccidentRepository accidentRepository;
     private final AccidentTypeService accidentTypeService;
     private final RuleService ruleService;
-
-    public AccidentService(
-            @Qualifier("hibernateAccidentRepositoryImpl") AccidentRepository accidentRepository,
-            AccidentTypeService accidentTypeService,
-            RuleService ruleService) {
-        this.accidentRepository = accidentRepository;
-        this.accidentTypeService = accidentTypeService;
-        this.ruleService = ruleService;
-    }
 
     /**
      * Создать инцидент.
@@ -40,7 +32,7 @@ public class AccidentService {
     public void create(Accident accident, int typeId, Set<Integer> ruleIds) {
         accident.setType(accidentTypeService.getById(typeId).get());
         accident.setRules(ruleService.findByIdList(ruleIds));
-        accidentRepository.create(accident);
+        accidentRepository.save(accident);
     }
 
     /**
@@ -58,7 +50,8 @@ public class AccidentService {
         }
         accident.setType(types.get());
         accident.setRules(ruleService.findByIdList(ruleIds));
-        return accidentRepository.update(accident);
+        accidentRepository.save(accident);
+        return true;
     }
 
     /**
