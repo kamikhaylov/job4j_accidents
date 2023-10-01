@@ -5,14 +5,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 class IndexControllerTest {
 
@@ -21,6 +26,10 @@ class IndexControllerTest {
 
     @Mock
     private Model model;
+    @Mock
+    private SecurityContext context;
+    @Mock
+    private Authentication authentication;
 
     @BeforeEach
     public void before() {
@@ -29,16 +38,23 @@ class IndexControllerTest {
 
     @AfterEach
     public void after() {
-        Mockito.reset(model);
+        Mockito.reset(model, context, authentication);
     }
 
     @Test
     public void whenGetIndex() {
-        String actual = controller.getIndex(model);
+        try (MockedStatic<SecurityContextHolder> securityContextHolderMockedStatic = Mockito.mockStatic(SecurityContextHolder.class)) {
+            Object object = new Object();
+            securityContextHolderMockedStatic.when(SecurityContextHolder::getContext).thenReturn(context);
+            when(context.getAuthentication()).thenReturn(authentication);
+            when(authentication.getPrincipal()).thenReturn(object);
 
-        assertNotNull(actual);
-        assertEquals("index/index", actual);
-        verify(model).addAttribute("user", "Konstantin");
-        verifyNoMoreInteractions(model);
+            String actual = controller.getIndex(model);
+
+            assertNotNull(actual);
+            assertEquals("index/index", actual);
+            verify(model).addAttribute("user", object);
+            verifyNoMoreInteractions(model);
+        }
     }
 }
