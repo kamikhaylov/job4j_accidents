@@ -28,4 +28,11 @@ public class SqlQueriesConfiguration {
         props.setLocation(new ClassPathResource("sql/ruleSqlQueries.xml"));
         return props;
     }
+
+    @Bean
+    public PropertiesFactoryBean securityProperties() {
+        PropertiesFactoryBean props = new PropertiesFactoryBean();
+        props.setLocation(new ClassPathResource("sql/securitySqlQueries.xml"));
+        return props;
+    }
 }

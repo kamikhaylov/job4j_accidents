@@ -1,6 +1,7 @@
 package ru.job4j.accidents.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class AccidentController {
     /** Показать страницу добавления инцидента */
     @GetMapping("/create")
     public String viewCreate(Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("types", accidentTypeService.getAll());
         model.addAttribute("rules", ruleService.getAll());
         return "accident/create";
@@ -41,9 +43,11 @@ public class AccidentController {
 
     /** Добавить инцидент */
     @PostMapping("/create")
-    public String create(@ModelAttribute Accident accident,
+    public String create(Model model,
+                         @ModelAttribute Accident accident,
                          @RequestParam("type.id") int typeId,
                          @RequestParam("ruleIds") Set<Integer> ruleIds) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         accidentService.create(accident, typeId, ruleIds);
         return "redirect:/accidents/list";
     }
@@ -51,6 +55,7 @@ public class AccidentController {
     /** Показать страницу редактирования инцидента */
     @GetMapping("/edit")
     public String viewEdit(Model model, @RequestParam("id") int id) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Optional<Accident> accident = accidentService.getById(id);
         if (accident.isEmpty()) {
             model.addAttribute("text", ACC0001.toString());
@@ -68,6 +73,7 @@ public class AccidentController {
                        @ModelAttribute Accident accident,
                        @RequestParam("type.id") int typeId,
                        @RequestParam("ruleIds") Set<Integer> ruleIds) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         if (!accidentService.update(accident, typeId, ruleIds)) {
             model.addAttribute("text", ACC0002.toString());
             return "error/error";
@@ -78,6 +84,7 @@ public class AccidentController {
     /** Показать страницу детальной информации по инциденту */
     @GetMapping("/details")
     public String viewDetails(Model model, @RequestParam("id") int id) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Optional<Accident> accident = accidentService.getById(id);
         if (accident.isEmpty()) {
             model.addAttribute("text", ACC0001.toString());

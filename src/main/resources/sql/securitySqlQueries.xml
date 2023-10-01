@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="selectUsersByUsername">
+        <![CDATA[
+            select
+                username,
+                password,
+                enabled
+            from users
+            where username = ?
+        ]]>
+    </entry>
+
+    <entry key="selectAuthoritiesByUsername">
+        <![CDATA[
+            select
+                u.username,
+                a.authority
+            from authorities as a, users as u
+            where u.username = ?
+                and u.authority_id = a.id
+        ]]>
+    </entry>
+
+</properties>

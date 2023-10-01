@@ -9,8 +9,13 @@
                 <a class="nav-item nav-link" th:href="@{/accidents/index}">Главная</a>
                 <a class="nav-item nav-link" th:href="@{/accidents/list}">Список инцидентов</a>
             </div>
-            <div class="navbar-nav d-flex flex-row-reverse">
+            <div class="navbar-nav d-flex flex-row-reverse" th:if="${user == null}">
+                <a class="nav-item nav-link me-3" th:href="@{/user/registration}">Регистрация</a>
+                <a class="nav-item nav-link" th:href="@{/user/login}">Войти</a>
+            </div>
+            <div class="navbar-nav d-flex flex-row-reverse" th:if="${user?.username != null}">
                 <a class="nav-item nav-link" th:href="@{/user/logout}">Выйти</a>
+                <a class="nav-item nav-link me-3" th:text="${user?.username}"></a>
             </div>
         </div>
     </nav>
