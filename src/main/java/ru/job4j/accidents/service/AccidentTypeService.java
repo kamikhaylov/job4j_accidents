@@ -8,8 +8,6 @@ import ru.job4j.accidents.repository.data.DataAccidentTypeRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Сервисный слой для работы c типами инцидентов
@@ -27,10 +25,7 @@ public class AccidentTypeService {
      * @return список типов инцидентов
      */
     public List<AccidentType> getAll() {
-        Iterable<AccidentType> types = accidentTypeRepository.findAll();
-        return StreamSupport
-                .stream(types.spliterator(), false)
-                .collect(Collectors.toList());
+        return accidentTypeRepository.findAll();
     }
 
     /**
