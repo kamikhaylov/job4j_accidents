@@ -34,6 +34,36 @@
 Таблицы базы данных написаны с помощью Liquibase. Схема БД:
 ![diagram.png](readme/image/diagram.png)
 
+### Список инцидентов
+![accidents.png](readme/image/accidents.png)
+
+### Детальная информация по инциденту
+![accident.png](readme/image/accident.png)
+
+### Создание нового инцидетна
+![create.png](readme/image/create.png)
+
+### Редактирование инцидетна
+![edit.png](readme/image/edit.png)
+
+### Приветствие
+![index.png](readme/image/index.png)
+
+### Авторизация пользователя
+![login.png](readme/image/login.png)
+
+### Ошибка при авторизации пользователя
+![loginFail.png](readme/image/loginFail.png)
+
+### Выход из системы
+![logout.png](readme/image/logout.png)
+
+### Регистрация нового пользователя
+![reg.png](readme/image/reg.png)
+
+### Ошибка при регистрации нового пользователя
+![regError.png](readme/image/regError.png)
+
 ### Контакты
 kanmikhaylov@gmail.com
 
