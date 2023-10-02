@@ -13,12 +13,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@Configuration
-@PropertySource("classpath:db.properties")
-@EnableTransactionManagement
+/**
+ * @Configuration
+ * @PropertySource("classpath:db.properties")
+ * @EnableTransactionManagement
+ */
 public class HbmConfiguration {
 
-    @Bean
+    /** @Bean */
     public LocalSessionFactoryBean sessionFactory(@Value("${hibernate.dialect}") String dialect, DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
@@ -29,7 +31,7 @@ public class HbmConfiguration {
         return sessionFactory;
     }
 
-    @Bean
+    /** @Bean */
     public PlatformTransactionManager htx(SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);

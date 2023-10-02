@@ -23,9 +23,9 @@ import static java.util.Objects.nonNull;
 
 /**
  * Реализация jdbc методов для работы с БД статей инцидентов
+ * @ThreadSafe
+ * @Repository
  */
-@ThreadSafe
-@Repository
 public class JdbcRuleRepositoryImpl implements RuleRepository {
 
     private final Properties properties;

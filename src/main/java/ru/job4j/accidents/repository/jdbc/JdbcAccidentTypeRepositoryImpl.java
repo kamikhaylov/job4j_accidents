@@ -21,9 +21,9 @@ import static java.util.Objects.nonNull;
 
 /**
  * Реализация jdbc методов для работы с БД типов инцидентов
+ * @ThreadSafe
+ * @Repository
  */
-@ThreadSafe
-@Repository
 public class JdbcAccidentTypeRepositoryImpl implements AccidentTypeRepository {
 
     private final Properties properties;

@@ -20,12 +20,14 @@ import ru.job4j.accidents.repository.mapper.RuleRowMapper;
 import javax.sql.DataSource;
 import java.util.List;
 
-@Configuration
-@PropertySource("classpath:db.properties")
-@EnableTransactionManagement
+/**
+ * @Configuration
+ * @PropertySource("classpath:db.properties")
+ * @EnableTransactionManagement
+ */
 public class JdbcConfiguration {
 
-    @Bean
+    /** @Bean */
     public DataSource dataSource(
             @Value("${jdbc.driver}") String driver,
             @Value("${jdbc.url}") String url,
@@ -39,23 +41,23 @@ public class JdbcConfiguration {
         return dataSource;
     }
 
-    @Bean
+    /** @Bean */
     public NamedParameterJdbcTemplate accidentJdbcTemplate(
             @Qualifier("dataSource") DataSource dataSource) {
         return new NamedParameterJdbcTemplate(dataSource);
     }
 
-    @Bean
+    /** @Bean */
     public ResultSetExtractor<List<Accident>> accidentResultSetExtractor() {
         return new AccidentResultSetExtractor();
     }
 
-    @Bean
+    /** @Bean */
     public RowMapper<AccidentType> accidentTypeRowMapper() {
         return new AccidentTypeRowMapper();
     }
 
-    @Bean
+    /** @Bean */
     public RowMapper<Rule> ruleRowMapper() {
         return new RuleRowMapper();
     }

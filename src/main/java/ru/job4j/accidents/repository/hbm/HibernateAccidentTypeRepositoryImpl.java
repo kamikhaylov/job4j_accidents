@@ -12,9 +12,9 @@ import java.util.Optional;
 
 /**
  * Реализация hibernate методов для работы с БД типов инцидентов
+ * @ThreadSafe
+ * @Repository
  */
-@ThreadSafe
-@Repository
 public class HibernateAccidentTypeRepositoryImpl implements AccidentTypeRepository {
 
     private final CrudRepository crudRepository;

@@ -14,9 +14,9 @@ import java.util.Set;
 
 /**
  * Реализация hibernate методов для работы с БД статей инцидентов
+ * @ThreadSafe
+ * @Repository
  */
-@ThreadSafe
-@Repository
 public class HibernateRuleRepositoryImpl implements RuleRepository {
 
     private final CrudRepository crudRepository;
