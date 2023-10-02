@@ -17,8 +17,10 @@ import ru.job4j.accidents.utils.RecordCreator;
 import java.util.Optional;
 import java.util.Set;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -44,6 +46,26 @@ class AccidentControllerItTest {
 
     @Test
     @WithMockUser
+    public void whenCreate() throws Exception {
+        AccidentType type = RecordCreator.createType();
+        Set<Rule> rules = RecordCreator.createRules();
+        Accident accident = RecordCreator.createAccident(type, rules);
+
+        this.mockMvc.perform(post("/accident/create")
+                .param("id", String.valueOf(accident.getId()))
+                        .param("name", accident.getName())
+                        .param("address", accident.getAddress())
+                        .param("type.id", String.valueOf(accident.getType().getId()))
+                        .param("text", accident.getText())
+                        .param("ruleIds", "1"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/accidents/list"));
+        verify(accidentService).create(accident, type.getId(), Set.of(1));
+    }
+
+    @Test
+    @WithMockUser
     public void whenViewEdit() throws Exception {
         AccidentType type = RecordCreator.createType();
         Set<Rule> rules = RecordCreator.createRules();
@@ -56,6 +78,28 @@ class AccidentControllerItTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("accident/edit"));
+    }
+
+    @Test
+    @WithMockUser
+    public void whenEdit() throws Exception {
+        AccidentType type = RecordCreator.createType();
+        Set<Rule> rules = RecordCreator.createRules();
+        Accident accident = RecordCreator.createAccident(type, rules);
+
+        when(accidentService.update(accident, type.getId(), Set.of(1))).thenReturn(true);
+
+        this.mockMvc.perform(post("/accident/edit")
+                .param("id", String.valueOf(accident.getId()))
+                .param("name", accident.getName())
+                .param("address", accident.getAddress())
+                .param("type.id", String.valueOf(accident.getType().getId()))
+                .param("text", accident.getText())
+                .param("ruleIds", "1"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/accidents/list"));
+        verify(accidentService).update(accident, type.getId(), Set.of(1));
     }
 
     @Test
